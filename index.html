@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Feliz Día de la Primavera Mica</title>
+    <style>
+        :root {
+            --text: #2b2b2b
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+            overflow: hidden
+        }
+
+        .stage {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(180deg, #c6f6ff 0%, #e8ffd9 100%);
+            display: grid;
+            place-items: center
+        }
+
+        canvas {
+            position: absolute;
+            inset: 0;
+            display: block;
+            z-index: 2
+        }
+
+        .message {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 1rem;
+            max-width: 800px
+        }
+
+        h1 {
+            font-size: clamp(28px, 6vw, 86px);
+            margin: 0;
+            color: var(--text);
+            text-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            letter-spacing: 1px
+        }
+
+        .sub {
+            font-size: clamp(14px, 2.2vw, 24px);
+            opacity: .95;
+            margin-top: 1rem;
+            line-height: 1.5;
+            color: #333
+        }
+
+        .controls {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            z-index: 10
+        }
+
+        button {
+            background: #ffd54a;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .12)
+        }
+
+        @keyframes sway {
+            0% {
+                transform: rotate(-6deg) translateY(0)
+            }
+
+            100% {
+                transform: rotate(6deg) translateY(-8px) scale(1.05)
+            }
+        }
+
+        .flower {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.55;
+            animation: sway 5s ease-in-out infinite alternate;
+        }
+
+        .flower svg {
+            width: 120px;
+            height: auto;
+        }
+
+        /* posiciones originales */
+        .f1 {
+            bottom: 40px;
+            left: 60px;
+            animation-duration: 6s
+        }
+
+        .f2 {
+            bottom: 50px;
+            right: 80px;
+            animation-duration: 7s
+        }
+
+        .f3 {
+            bottom: 30px;
+            left: 45%;
+            animation-duration: 5.5s
+        }
+
+        /* flores nuevas adicionales */
+        .f4 {
+            top: 15%;
+            left: 20%;
+            animation-duration: 6.5s
+        }
+
+        .f5 {
+            top: 25%;
+            right: 25%;
+            animation-duration: 8s
+        }
+
+        .f6 {
+            bottom: 20%;
+            left: 20%;
+            animation-duration: 7.5s
+        }
+
+        .f7 {
+            bottom: 25%;
+            right: 30%;
+            animation-duration: 5.8s
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stage">
+        <!-- flores SVG de fondo -->
+        <div class="flower f1">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="12" fill="#ffb300" />
+                <ellipse cx="50" cy="25" rx="12" ry="20" fill="#ffeb3b" />
+                <ellipse cx="50" cy="75" rx="12" ry="20" fill="#ffeb3b" />
+                <ellipse cx="25" cy="50" rx="20" ry="12" fill="#ffeb3b" />
+                <ellipse cx="75" cy="50" rx="20" ry="12" fill="#ffeb3b" />
+            </svg>
+        </div>
+        <div class="flower f2">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="10" fill="#ff9800" />
+                <ellipse cx="50" cy="20" rx="10" ry="18" fill="#ffee58" />
+                <ellipse cx="50" cy="80" rx="10" ry="18" fill="#ffee58" />
+                <ellipse cx="20" cy="50" rx="18" ry="10" fill="#ffee58" />
+                <ellipse cx="80" cy="50" rx="18" ry="10" fill="#ffee58" />
+            </svg>
+        </div>
+        <div class="flower f3">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="11" fill="#ffb300" />
+                <ellipse cx="50" cy="18" rx="11" ry="17" fill="#fff176" />
+                <ellipse cx="50" cy="82" rx="11" ry="17" fill="#fff176" />
+                <ellipse cx="18" cy="50" rx="17" ry="11" fill="#fff176" />
+                <ellipse cx="82" cy="50" rx="17" ry="11" fill="#fff176" />
+            </svg>
+        </div>
+
+        <!-- nuevas flores -->
+        <div class="flower f4">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="12" fill="#ff9800" />
+                <ellipse cx="50" cy="25" rx="12" ry="20" fill="#ffeb3b" />
+                <ellipse cx="50" cy="75" rx="12" ry="20" fill="#ffeb3b" />
+                <ellipse cx="25" cy="50" rx="20" ry="12" fill="#ffeb3b" />
+                <ellipse cx="75" cy="50" rx="20" ry="12" fill="#ffeb3b" />
+            </svg>
+        </div>
+        <div class="flower f5">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="10" fill="#ffb300" />
+                <ellipse cx="50" cy="20" rx="10" ry="18" fill="#ffee58" />
+                <ellipse cx="50" cy="80" rx="10" ry="18" fill="#ffee58" />
+                <ellipse cx="20" cy="50" rx="18" ry="10" fill="#ffee58" />
+                <ellipse cx="80" cy="50" rx="18" ry="10" fill="#ffee58" />
+            </svg>
+        </div>
+        <div class="flower f6">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="11" fill="#ff9800" />
+                <ellipse cx="50" cy="18" rx="11" ry="17" fill="#fff176" />
+                <ellipse cx="50" cy="82" rx="11" ry="17" fill="#fff176" />
+                <ellipse cx="18" cy="50" rx="17" ry="11" fill="#fff176" />
+                <ellipse cx="82" cy="50" rx="17" ry="11" fill="#fff176" />
+            </svg>
+        </div>
+        <div class="flower f7">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="11" fill="#ff9800" />
+                <ellipse cx="50" cy="18" rx="11" ry="17" fill="#ffee58" />
+                <ellipse cx="50" cy="82" rx="11" ry="17" fill="#ffee58" />
+                <ellipse cx="18" cy="50" rx="17" ry="11" fill="#ffee58" />
+                <ellipse cx="82" cy="50" rx="17" ry="11" fill="#ffee58" />
+            </svg>
+        </div>
+
+        <canvas id="c"></canvas>
+        <div class="message" aria-hidden="false">
+            <h1>Feliz día de la primavera, Mica</h1>
+            <div class="sub">Espero que tengas un día tan hermoso como vos. Te quiero mucho 💛<br></div>
+        </div>
+        <div class="controls"><button id="burst">Reproducir explosión</button></div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('c');
+        const ctx = canvas.getContext('2d');
+        let W = canvas.width = innerWidth;
+        let H = canvas.height = innerHeight;
+
+        addEventListener('resize', () => { W = canvas.width = innerWidth; H = canvas.height = innerHeight });
+
+        const rand = (a, b) => Math.random() * (b - a) + a;
+
+        class Petal {
+            constructor(x, y) {
+                this.x = x; this.y = y;
+                const angle = rand(0, Math.PI * 2);
+                const speed = rand(2, 10);
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed - rand(2, 6);
+                this.size = rand(8, 28);
+                this.rot = rand(0, Math.PI * 2);
+                this.vrot = rand(-0.06, 0.06);
+                this.life = 1;
+                this.decay = rand(0.003, 0.01);
+                const palettes = [[255, 243, 128], [255, 221, 87], [255, 236, 139], [255, 196, 37]];
+                const p = palettes[Math.floor(Math.random() * palettes.length)];
+                this.color = `rgba(${p[0]},${p[1]},${p[2]},`;
+                this.wob = rand(0.02, 0.12);
+                this.offset = rand(0, 1000);
+            }
+            update(dt) {
+                this.vy += 0.12 * dt;
+                this.vx *= 0.999; this.vy *= 0.999;
+                this.x += this.vx * dt;
+                this.y += this.vy * dt;
+                this.rot += this.vrot * dt;
+                this.x += Math.sin((this.y * 0.02) + this.offset) * this.wob * 10;
+                this.life -= this.decay * dt;
+            }
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rot);
+                ctx.beginPath();
+                ctx.ellipse(0, 0, this.size * 0.6, this.size, 0, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fillStyle = this.color + Math.max(0, Math.min(1, this.life)) + ')';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(0, -this.size * 0.2);
+                ctx.lineTo(0, this.size * 0.2);
+                ctx.strokeStyle = 'rgba(0,0,0,0.06)';
+                ctx.lineWidth = Math.max(1, this.size * 0.06);
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+
+        let petals = [];
+
+        function burst(x, y, count = 120) {
+            for (let i = 0; i < count; i++) petals.push(new Petal(x, y));
+        }
+
+        let first = true;
+        function tryAutoBurst() {
+            if (first) {
+                first = false;
+                burst(W / 2, H / 2, 160);
+            }
+        }
+
+        let last = performance.now();
+        function loop(now) {
+            const dt = Math.min(40, now - last) / 16.666;
+            last = now;
+            ctx.clearRect(0, 0, W, H);
+
+            for (let i = petals.length - 1; i >= 0; i--) {
+                const p = petals[i];
+                p.update(dt);
+                p.draw(ctx);
+                if (p.life <= 0 || p.y > H + 100 || p.x < -200 || p.x > W + 200) petals.splice(i, 1);
+            }
+
+            requestAnimationFrame(loop);
+        }
+
+        document.getElementById('burst').addEventListener('click', () => burst(W / 2, H / 2, 180));
+
+        window.addEventListener('load', () => {
+            tryAutoBurst();
+            requestAnimationFrame(loop);
+        });
+
+        function unlock() { tryAutoBurst(); window.removeEventListener('touchstart', unlock); window.removeEventListener('mousemove', unlock); }
+        window.addEventListener('touchstart', unlock, { passive: true });
+        window.addEventListener('mousemove', unlock, { passive: true });
+    </script>
+</body>
+
+</html>
